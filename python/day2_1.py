@@ -17,21 +17,27 @@ max_green = 13
 max_blue = 14
 count = 0
 total = 0
-numgame = 1
+numgame = 0
 gameok = False
+print("Conditions")
+print("Max Red:", max_red,  "Max Green", max_green, "Max Blue", max_blue)
 for line in t:
     lt = line.split(":")
     #print(lt)
     game.append(lt[0])
+    numberGame = lt[0].split(" ")[1]
+    #print("Game:",numberGame)
     lt.pop(0)
+    
     for l in lt: 
-        
+        print("game",numberGame,"content",l)
         mt = l.split(";")
         for m in mt:
             #print(m)
             ct = m.split(",")
             for c in ct:
                     #print ("C:",c)
+                
                 r = c.find("red")
                 if(r != -1):
                     num_red = num_red + int(c[0:r])                  
@@ -46,26 +52,29 @@ for line in t:
                         #print("blue",int(c[0:b]))
                     #check
                
-                if (num_red > max_red or
-                       num_blue > max_blue or
-                       num_green > max_green):
-                        print("Game ",count," exceeded limits")
-                        gameok = False
+        if (num_red > max_red or
+                num_blue > max_blue or
+                num_green > max_green):
+                    #print("exceeded limits red", num_red,"green", num_green, "blue", num_blue)
+                gameok = False
+                num_blue = num_red = num_green = 0
                         #num_blue = num_green = num_red = 0
-                else:
+        else:
                         #total = total + count
-                        gameok = True
+                gameok = True
+                num_blue = num_red = num_green = 0
+                
             
-            print("red", num_red, "blue", num_blue,"green", num_green)
-            num_blue = num_red = num_green = 0
-        print("______________________________")
+            #print("red", num_red, "blue", num_blue,"green", num_green)
+           
+        #print("______________________________")
         if(gameok==True):
-            total = total + numgame
-        numgame = numgame + 1
+            #print("Game", int(numberGame)," correct! adding it to", total)
+            total = total + int(numberGame)
+        else:
+            print("Game", int(numberGame)," incorrect!")
         gameok = False
-        game.append(numgame)
+        game.append(total)
             
             #calculate 
-    #game.append()
-    #games.append(game)
-    print("Total:",numgame)
+print("Total:",total)
