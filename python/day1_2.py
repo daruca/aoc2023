@@ -21,18 +21,19 @@ for line in t:
     }
     #line = line[::-1]
     #print(line)
-    for l in line:
+
    
-        digits = re.findall("(?=(one|two|three|four|five|six|seven|eight|nine|[1-9]))", line)
-        parsed_values = [values[num] for num in digits]
+    digits = re.findall("(?=(one|two|three|four|five|six|seven|eight|nine|[1-9]))", line)
+    parsed_values = [values[num] for num in digits]
         
         #res = [int (i) for i in x if i.isdigit()]
-        ret = str(parsed_values[0]) + str(parsed_values[-1])
+    ret = str(parsed_values[0]) + str(parsed_values[-1])
 
         #print (res,"-->",ret)
         #accumulate partial results
-        parc = int(ret)
-        #print ("partial ", total, " and added ",parc, "partial calib: ", total)
-        total = total + parc
+    parc = int(ret)
+    total = total + parc
+    print ("partial ", total, " and added ",parc, "partial calib: ", total)
+        
 
 print ("calibration: ",total)
