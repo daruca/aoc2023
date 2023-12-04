@@ -30,14 +30,16 @@ for line in t:
     lt.pop(0)
     
     for l in lt: 
-        print("game",numberGame,"content",l)
+        #print("game",numberGame,"content",l)
         mt = l.split(";")
+        num_blue = num_red = num_green = 0
+        gameok = False
         for m in mt:
             #print(m)
+            num_blue = num_red = num_green = 0
             ct = m.split(",")
             for c in ct:
                     #print ("C:",c)
-                
                 r = c.find("red")
                 if(r != -1):
                     num_red = num_red + int(c[0:r])                  
@@ -50,31 +52,27 @@ for line in t:
                 if(b != -1):
                     num_blue = num_blue + int(c[0:b])   
                         #print("blue",int(c[0:b]))
-                    #check
-               
-        if (num_red > max_red or
+                    #check    
+            if (num_red > max_red or
                 num_blue > max_blue or
                 num_green > max_green):
-                    #print("exceeded limits red", num_red,"green", num_green, "blue", num_blue)
-                gameok = False
-                num_blue = num_red = num_green = 0
-                        #num_blue = num_green = num_red = 0
-        else:
-                        #total = total + count
-                gameok = True
-                num_blue = num_red = num_green = 0
-                
-            
-            #print("red", num_red, "blue", num_blue,"green", num_green)
-           
-        #print("______________________________")
+                    print("exceeded limits red", num_red,"green", num_green, "blue", num_blue)
+                    gameok = False
+                    numberGame = num_blue = num_red = num_green = 0
+                    exit
+            else:
+                    gameok = True
+                    print("red", num_red, "blue", num_blue,"green", num_green) 
+                    num_blue = num_red = num_green = 0
+            print("______________________________")
         if(gameok==True):
             #print("Game", int(numberGame)," correct! adding it to", total)
             total = total + int(numberGame)
+            print("Game", int(numberGame)," correct! Total:", total)
         else:
-            print("Game", int(numberGame)," incorrect!")
+            print("Game", int(numberGame)," incorrect! Total:", total)
         gameok = False
         game.append(total)
             
             #calculate 
-print("Total:",total)
+#print("Total:",total)
